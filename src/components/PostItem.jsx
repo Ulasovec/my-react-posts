@@ -1,14 +1,15 @@
 import React from 'react';
 import './PostItem.css';
 
-const PostItem = ({post}) => {
+const PostItem = ({post, deletePost}) => {
     return (
         <div className="postItem">
             <div className="postItem__content">
+                <p>{new Date(post.id).toLocaleDateString()}</p>
                 <p><strong>{post.title}</strong></p>
                 <p>{post.body}</p>
             </div>
-            <button>Delete</button>
+            <button onClick={() => deletePost(post)}>Delete</button>
         </div>
     );
 };

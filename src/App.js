@@ -2,6 +2,7 @@ import './App.css';
 import {useState} from "react";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
+import SearchSortForm from "./components/SearchSortForm";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
@@ -16,8 +17,8 @@ function App() {
         <div className="App">
             <h1>Новости</h1>
             <PostForm addPost={addPost}/>
-            <h2>Search and Sort</h2>
-            <PostList posts={posts}/>
+            <SearchSortForm />
+            <PostList posts={posts} deletePost={deletePost}/>
         </div>
     );
 }

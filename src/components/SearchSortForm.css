@@ -1,0 +1,8 @@
+.searchSortForm {
+    padding-top: 16px;
+    background-color: #eee;
+}
+
+.searchSortForm > * {
+    margin: 8px;
+}
