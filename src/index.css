@@ -20,12 +20,3 @@ code {
   border: 1px solid teal;
 }
 
-button {
-  padding: 8px 16px;
-  border: none;
-  background: green;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 4px;
-}

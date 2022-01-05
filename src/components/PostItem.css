@@ -1,0 +1,14 @@
+.postItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.postItem > * {
+    margin: 8px;
+}
+
+.postItem__content > * {
+    margin: 4px 0px;
+    text-align: left;
+}

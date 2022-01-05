@@ -1,0 +1,8 @@
+.postList {
+    padding-top: 16px;
+    background-color: #ddd;
+}
+
+.postList > * {
+    margin: 8px 0px;
+}
