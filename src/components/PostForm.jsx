@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import './PostForm.css';
+import MyButton from "./UI/button/MyButton";
+import MyInput from "./UI/input/MyInput";
 
 const PostForm = ({addPost}) => {
     const [title, setTitle] = useState('');
@@ -17,11 +19,14 @@ const PostForm = ({addPost}) => {
         <div className="postForm">
             <h2>Добавить новость</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Заголовок..." value={title}
+                <MyInput type="text" placeholder="Заголовок..." value={title}
                        onChange={event => setTitle(event.target.value)}/>
                 <textarea rows="3" placeholder="Текст поста..." value={body}
                        onChange={event => setBody(event.target.value)}/>
-                <button disabled={!title || !body} type="submit">Add Post</button>
+                <div>
+                    <MyButton disabled={!title || !body} type="submit">Add Post</MyButton>
+                </div>
+
             </form>
         </div>
 
