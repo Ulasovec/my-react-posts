@@ -4,12 +4,18 @@ import './PostItem.css';
 const PostItem = ({post, deletePost}) => {
     return (
         <div className="postItem">
-            <div className="postItem__content">
-                <p>{new Date(post.id).toLocaleDateString()}</p>
-                <p><strong>{post.title}</strong></p>
-                <p>{post.body}</p>
+            <div className="postItem__date">
+                <strong>{new Date(post.id).toLocaleDateString()}</strong>
             </div>
-            <button onClick={() => deletePost(post)}>Delete</button>
+            <div className="postItem__content">
+                <strong>{post.title}</strong>
+                <div>
+                    {post.body}
+                </div>
+            </div>
+            <div className="postItem__btn">
+                <button onClick={() => deletePost(post)}>Delete</button>
+            </div>
         </div>
     );
 };

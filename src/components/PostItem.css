@@ -1,15 +1,17 @@
 .postItem {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid teal;
 }
 
-.postItem > * {
-    margin: 8px;
-}
+/*.postItem > * {*/
+/*    margin: 8px;*/
+/*}*/
 
-.postItem__content > * {
-    margin: 4px 0px;
-    text-align: left;
-}
+/*.postItem__content > * {*/
+/*    margin: 4px 0px;*/
+/*    text-align: left;*/
+/*}*/
