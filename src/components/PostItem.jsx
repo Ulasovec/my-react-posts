@@ -8,7 +8,7 @@ const PostItem = ({post, deletePost}) => {
                 <strong>{new Date(post.id).toLocaleDateString()}</strong>
             </div>
             <div className="postItem__content">
-                <strong>{post.title}</strong>
+                <strong>{`${post.id}. ${post.title}`}</strong>
                 <div>
                     {post.body}
                 </div>

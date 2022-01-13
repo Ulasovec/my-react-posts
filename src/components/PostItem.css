@@ -7,6 +7,9 @@
     border: 1px solid teal;
 }
 
+.postItem__content {
+    margin: 8px;
+}
 /*.postItem > * {*/
 /*    margin: 8px;*/
 /*}*/
