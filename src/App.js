@@ -9,6 +9,7 @@ import {usePosts} from "./hooks/usePosts";
 import axios from "axios";
 import {useFetching} from "./hooks/useFetching";
 import Fetch from "./components/API/Fetch";
+import GeneralItem from "./components/GeneralItem";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
@@ -70,6 +71,12 @@ function App() {
             <Fetch
                 uri={'https://jsonplaceholder.typicode.com/posts?_limit=3'}
                 renderSuccess={({data}) => (<PostList posts={data} deletePost={deletePost}/>)}
+            />
+            {/*Рендер произвольного объекта (показывает строковые и числовые поля верхнего уровня)*/}
+            <GeneralItem genItem={{id: 1, name: 'Ivan', email: 'aa@bb.com'}}/>
+            <Fetch
+                uri={'https://jsonplaceholder.typicode.com/users/1'}
+                renderSuccess={({data}) => (<GeneralItem genItem={data} />)}
             />
         </div>
     );
