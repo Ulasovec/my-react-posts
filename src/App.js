@@ -10,7 +10,7 @@ import axios from "axios";
 import {useFetching} from "./hooks/useFetching";
 import Fetch from "./components/API/Fetch";
 import GeneralItem from "./components/GeneralItem";
-import GeneralList from "./components/UI/GeneralList";
+import GeneralList from "./components/GeneralList";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
@@ -71,6 +71,11 @@ function App() {
             <Fetch
                 uri={'https://jsonplaceholder.typicode.com/users/1'}
                 renderSuccess={data => <GeneralItem genItem={data} />}
+            />
+            <h2>Backend Strapi</h2>
+            <Fetch
+                uri={'http://localhost:1337/api/articles'}
+                renderSuccess={data => <GeneralList items={data.data} renderItem={item => <GeneralItem genItem={item} />}/>}
             />
         </div>
     );
