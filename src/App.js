@@ -10,24 +10,13 @@ import axios from "axios";
 import {useFetching} from "./hooks/useFetching";
 import Fetch from "./components/API/Fetch";
 import GeneralItem from "./components/GeneralItem";
+import GeneralList from "./components/UI/GeneralList";
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
     const [filter, setFilter] = useState({sortBy: '', query: ''});
     const [modal, setModal] = useState(false);
     const sortedAndFilteredPosts = usePosts(posts, filter.sortBy, filter.query);
-
-    // Следующий закоментаренный код ушел в хук usePosts
-    /*const sortedPosts = useMemo(
-        () => filter.sortBy
-            ? [...posts].sort((a, b) => a[filter.sortBy].localeCompare(b[filter.sortBy]))
-            : [...posts],
-        [filter.sortBy, posts]
-    );
-    const sortedAndFilteredPosts = useMemo(
-        () => sortedPosts.filter(post => post.body.toLowerCase().includes(filter.query.toLowerCase())),
-        [filter.query, sortedPosts]
-    );*/
 
     // useFetching - хук-обертка для callback()
     // axios выбрасывает исключение даже при кодах возврата типа 404 (страница не найдена)
@@ -70,13 +59,18 @@ function App() {
                Посты сразу рендерятся (без сортировки и фильтрации) */}
             <Fetch
                 uri={'https://jsonplaceholder.typicode.com/posts?_limit=3'}
-                renderSuccess={({data}) => (<PostList posts={data} deletePost={deletePost}/>)}
+                renderSuccess={data => <PostList posts={data} deletePost={deletePost}/>}
+            />
+            {/*Рендер списка произвольных компонентов*/}
+            <Fetch
+                uri={'https://jsonplaceholder.typicode.com/todos?_limit=3'}
+                renderSuccess={data => <GeneralList items={data} renderItem={item => <GeneralItem genItem={item} />}/>}
             />
             {/*Рендер произвольного объекта (показывает строковые и числовые поля верхнего уровня)*/}
             <GeneralItem genItem={{id: 1, name: 'Ivan', email: 'aa@bb.com'}}/>
             <Fetch
                 uri={'https://jsonplaceholder.typicode.com/users/1'}
-                renderSuccess={({data}) => (<GeneralItem genItem={data} />)}
+                renderSuccess={data => <GeneralItem genItem={data} />}
             />
         </div>
     );
