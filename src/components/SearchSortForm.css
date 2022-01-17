@@ -1,0 +1,12 @@
+.searchSortForm {
+    padding-top: 16px;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.searchSortForm > * {
+    margin: 8px;
+}

@@ -1,0 +1,8 @@
+.generalList {
+    padding-top: 16px;
+    background-color: #ddd;
+}
+
+.generalList > * {
+    margin: 8px 8px;
+}

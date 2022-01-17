@@ -1,0 +1,18 @@
+.postForm {
+    padding-top: 16px;
+
+    background-color: #ccc;
+}
+
+.postForm form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: normal;
+    /*margin: 8px;*/
+}
+
+.postForm form > * {
+    margin: 4px 8px;
+    text-align: left;
+}
