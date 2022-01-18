@@ -45,10 +45,10 @@ function App() {
                 <PostForm addPost={addPost}/>
             </MyModal>
             <SearchSortForm filter={filter} setFilter={setFilter}/>
-            { postError &&
+            {postError &&
                 <h1>Произошла ошибка: {postError}</h1>
             }
-            { isPostLoading
+            {isPostLoading
                 ? <div><h2>Loading...</h2></div>
                 : <PostList posts={sortedAndFilteredPosts} deletePost={deletePost}/>
             }
@@ -64,18 +64,27 @@ function App() {
             {/*Рендер списка произвольных компонентов*/}
             <Fetch
                 uri={'https://jsonplaceholder.typicode.com/todos?_limit=3'}
-                renderSuccess={data => <GeneralList items={data} renderItem={item => <GeneralItem genItem={item} />}/>}
+                renderSuccess={data => <GeneralList items={data} renderItem={item => <GeneralItem genItem={item}/>}/>}
             />
             {/*Рендер произвольного объекта (показывает строковые и числовые поля верхнего уровня)*/}
             <GeneralItem genItem={{id: 1, name: 'Ivan', email: 'aa@bb.com'}}/>
             <Fetch
                 uri={'https://jsonplaceholder.typicode.com/users/1'}
-                renderSuccess={data => <GeneralItem genItem={data} />}
+                renderSuccess={data => <GeneralItem genItem={data}/>}
             />
             <h2>Backend Strapi</h2>
             <Fetch
-                uri={'http://localhost:1337/api/articles'}
-                renderSuccess={data => <GeneralList items={data.data} renderItem={item => <GeneralItem genItem={item} />}/>}
+                uri={'http://localhost:1337/api/articles?populate=cover'}
+                renderSuccess={data => <GeneralList items={data.data} renderItem={item => (
+                    <>
+                        <GeneralItem genItem={item.attributes}/>
+                        {item.attributes?.cover?.data?.attributes?.url
+                            ? <img src={`http://localhost:1337${item.attributes?.cover?.data?.attributes?.url}`}/>
+                            : null
+                        }
+                    </>
+
+                )}/>}
             />
         </div>
     );
