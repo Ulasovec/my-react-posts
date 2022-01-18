@@ -11,6 +11,11 @@ import {useFetching} from "./hooks/useFetching";
 import Fetch from "./components/API/Fetch";
 import GeneralItem from "./components/GeneralItem";
 import GeneralList from "./components/GeneralList";
+import {QueryClient, QueryClientProvider} from "react-query";
+import Articles from "./components/Articles";
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
@@ -83,9 +88,14 @@ function App() {
                             : null
                         }
                     </>
-
                 )}/>}
             />
+
+            <QueryClientProvider client={queryClient}>
+
+                <Articles />
+
+            </QueryClientProvider>
         </div>
     );
 }
