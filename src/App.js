@@ -84,7 +84,7 @@ function App() {
                     <>
                         <GeneralItem genItem={item.attributes}/>
                         {item.attributes?.cover?.data?.attributes?.url
-                            ? <img src={`http://localhost:1337${item.attributes?.cover?.data?.attributes?.url}`}/>
+                            ? <img width="30%" src={`http://localhost:1337${item.attributes?.cover?.data?.attributes?.url}`}/>
                             : null
                         }
                     </>

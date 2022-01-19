@@ -1,0 +1,10 @@
+.articles {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-top: 15px;
+}
+
+.article__item {
+    margin: 25px 0px;
+}
