@@ -11,6 +11,11 @@ const Articles = () => {
             queryClient.invalidateQueries('articles');
         },
     });
+    const mutationDelete = useMutation(deleteArticle, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('articles');
+        },
+    });
     const [files, setFiles] = useState();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -23,6 +28,10 @@ const Articles = () => {
 
     function postArticle(newArticle) {
         return axios.post('http://localhost:1337/api/articles', newArticle);
+    }
+
+    function deleteArticle(id) {
+        return axios.delete(`http://localhost:1337/api/articles/${id}`);
     }
 
     async function handleSubmit(e) {
@@ -57,7 +66,7 @@ const Articles = () => {
                                 : null
                             }
                         </p>
-
+                        <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
                     </li>
                 )}
             </ul>
