@@ -16,7 +16,9 @@ function Fetch({
     console.log({data, error, isLoading});
     if (isLoading) return loadingFallback;
     if (error) return renderError(error);
-    if (data) return renderSuccess({data});
+    if (data) return renderSuccess(data);
+
+
     return (
         <>
             <p>Nothing to render !!!</p>
