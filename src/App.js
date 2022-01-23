@@ -13,7 +13,7 @@ import GeneralItem from "./components/GeneralItem";
 import GeneralList from "./components/GeneralList";
 import {QueryClient, QueryClientProvider} from "react-query";
 import Articles from "./components/Articles";
-
+import PostAction from "./components/PostAction";
 // Create a client
 const queryClient = new QueryClient();
 
@@ -94,7 +94,7 @@ function App() {
             <QueryClientProvider client={queryClient}>
 
                 <Articles />
-
+                <PostAction/>
             </QueryClientProvider>
         </div>
     );

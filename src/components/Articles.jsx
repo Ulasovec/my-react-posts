@@ -34,7 +34,7 @@ const Articles = () => {
         return axios.delete(`http://localhost:1337/api/articles/${id}`);
     }
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData();
         formData.append('files.cover', files[0]);
