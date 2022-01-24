@@ -5,25 +5,29 @@ import PostsAction from "./PostsAction";
 import NewPostsAction from "./NewPostsAction";
 
 const PostAction = () => {
-    const query = useQuery('postAction', getPost);
-    const [posts,setPost]=useState([query.data]);
-    const LastElement=useRef();
+    const [limit, setLimit] = useState(5);
+    const query = useQuery(['postAction', limit], () => getPost(limit));
+    //const [posts,setPost]=useState([query.data]);
+    const lastElement=useRef();
     const observer=useRef();
 
     useEffect(()=> {
+        if (query.isLoading) return;
+        if (observer.current) observer.current.disconnect();
         var callback = function(entries, observer) {
-            if (entries[0].isIntersecting){
+            if (entries[0].isIntersecting && limit <= 100){
                 console.log('Див в зоне видимости');
-                setPost([...posts,...query.data]);
-                console.log(posts);
+                //setPost([...posts,...query.data]);
+                setLimit(limit + 5);
+                console.log(limit);
             }
         };
         observer.current = new IntersectionObserver(callback);
-        observer.current.observe(LastElement.current);
-    },[]);
+        observer.current.observe(lastElement.current);
+    },[query.isLoading]);
 
-    async function getPost() {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    async function getPost(limit) {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
         // console.log('GET: ', response.data);
         return response.data;
     }
@@ -40,9 +44,9 @@ const PostAction = () => {
 
     return (
         <div>
-            {query.data.map(item => <PostsAction key={item.id} item={item} ref={LastElement}/>)}
-            {posts.map(item => <NewPostsAction key={item.id} item={item}/>)}
-            <div style={{height:20, background:'red' }} ref={LastElement}> </div>
+            {query.data.map(item => <PostsAction key={item.id} item={item} ref={lastElement}/>)}
+            {/*{posts.map(item => <NewPostsAction key={item.id} item={item}/>)}*/}
+            <div style={{height:20, background:'red' }} ref={lastElement}> </div>
 
         </div>
     );
