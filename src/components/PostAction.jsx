@@ -14,7 +14,7 @@ const PostAction = () => {
         var callback = function(entries, observer) {
             if (entries[0].isIntersecting){
                 console.log('Див в зоне видимости');
-                 setPost([...posts,...query.data]);
+                setPost([...posts,...query.data]);
                 console.log(posts);
             }
         };
