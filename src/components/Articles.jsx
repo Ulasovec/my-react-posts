@@ -12,6 +12,14 @@ const Articles = () => {
             queryClient.invalidateQueries('articles');
         },
     });
+    const mutationDelete = useMutation(deleteArticle, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('articles');
+        },
+    });
+    const [files, setFiles] = useState();
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
 
     async function getArticles() {
         const response = await axios.get('http://localhost:1337/api/articles?populate=cover');
@@ -23,11 +31,11 @@ const Articles = () => {
         return axios.post('http://localhost:1337/api/articles', newArticle);
     }
 
-    const [files, setFiles] = useState();
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
+    function deleteArticle(id) {
+        return axios.delete(`http://localhost:1337/api/articles/${id}`);
+    }
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData();
         formData.append('files.cover', files[0]);
@@ -60,7 +68,7 @@ const Articles = () => {
                                     : null
                                 }
                             </p>
-
+                            <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
                         </li>
                     )}
                 </ul>
