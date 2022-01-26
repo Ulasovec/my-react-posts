@@ -6,13 +6,13 @@ import NewPostsAction from "./NewPostsAction";
 
 const PostAction = () => {
     const [limit, setLimit] = useState(5);
-    const query = useQuery(['postAction', limit], () => getPost(limit));
+    const query = useQuery(['postAction', limit], () => getPost(limit) , { keepPreviousData : true });
     //const [posts,setPost]=useState([query.data]);
     const lastElement=useRef();
     const observer=useRef();
 
     useEffect(()=> {
-        if (query.isLoading) return;
+        if (query.isFetching) return;
         if (observer.current) observer.current.disconnect();
         var callback = function(entries, observer) {
             if (entries[0].isIntersecting && limit <= 100){
@@ -24,7 +24,7 @@ const PostAction = () => {
         };
         observer.current = new IntersectionObserver(callback);
         observer.current.observe(lastElement.current);
-    },[query.isLoading]);
+    },[query.isFetching]);
 
     async function getPost(limit) {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
