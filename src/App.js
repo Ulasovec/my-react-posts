@@ -4,7 +4,7 @@ import {Route, Routes, Outlet, Link} from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import TestPage from "./pages/TestPage";
 import Whoops404 from "./pages/Whoops404";
-import {About, Contacts, ArticlesPage, DemosIndexPage, SearchSortPage, ArticlePage} from "./pages/pages";
+import {About, Contacts, ArticlesPage, DemosIndexPage, SearchSortPage, ArticlePage, FetchPage} from "./pages/pages";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -24,6 +24,7 @@ function App() {
                         <Route path="articles" element={<ArticlesPage/>} />
                         <Route path="articles/:articleId" element={<ArticlePage/>} />
                         <Route path="search-sort" element={<SearchSortPage/>}/>
+                        <Route path="fetch" element={<FetchPage/>} />
                     </Route>
                 </Route>
                 <Route path="*" element={<Whoops404/>} />
@@ -32,11 +33,14 @@ function App() {
     );
 }
 
-// Layout, Header, Footer
+/**
+ * Layouts, Header, Footer
+ */
+
+// Основной Layout. Содержит основные элементы страницы, которые загружаются на все роуты
 function Layout() {
     return (
-        // Основной Layout. Содержит основные элементы страницы, которые
-        // загружаются на все роуты
+
         <div className="App">
             <Header/>
             <main className="content">
@@ -68,6 +72,7 @@ function Footer() {
     )
 }
 
+// Layout для демо-страниц - path="/demos"
 function DemosLayout() {
     return (
         <div>
@@ -76,6 +81,7 @@ function DemosLayout() {
                 <Link to="../demos">Demo List</Link>
                 <Link to="articles">Articles</Link>
                 <Link to="search-sort">Search and Sort Posts</Link>
+                <Link to="fetch">Fetch</Link>
             </nav>
             <Outlet/>
         </div>

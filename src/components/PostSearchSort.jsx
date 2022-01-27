@@ -35,7 +35,7 @@ const PostSearchSort = () => {
 
     return (
         <div>
-            <h1>Посты - Получение, добавление, удаление, поиск и сортировка</h1>
+            <h3>Посты - Получение, добавление, удаление, поиск и сортировка</h3>
             {/*<button onClick={fetchPosts}>Добавить посты</button>*/}
             <MyButton onClick={() => setModal(true)}>Добавить новость</MyButton>
             <MyModal visible={modal} setVisible={setModal}>
