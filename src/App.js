@@ -4,7 +4,16 @@ import {Route, Routes, Outlet, Link} from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import TestPage from "./pages/TestPage";
 import Whoops404 from "./pages/Whoops404";
-import {About, Contacts, ArticlesPage, DemosIndexPage, SearchSortPage, ArticlePage, FetchPage} from "./pages/pages";
+import {
+    About,
+    Contacts,
+    ArticlesPage,
+    DemosIndexPage,
+    SearchSortPage,
+    ArticlePage,
+    FetchPage,
+    InfinityPage
+} from "./pages/pages";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -25,6 +34,7 @@ function App() {
                         <Route path="articles/:articleId" element={<ArticlePage/>} />
                         <Route path="search-sort" element={<SearchSortPage/>}/>
                         <Route path="fetch" element={<FetchPage/>} />
+                        <Route path="infinity" element={<InfinityPage/>}/>
                     </Route>
                 </Route>
                 <Route path="*" element={<Whoops404/>} />
@@ -82,6 +92,7 @@ function DemosLayout() {
                 <Link to="articles">Articles</Link>
                 <Link to="search-sort">Search and Sort Posts</Link>
                 <Link to="fetch">Fetch</Link>
+                <Link to="infinity">Infinity List</Link>
             </nav>
             <Outlet/>
         </div>

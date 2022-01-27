@@ -5,6 +5,7 @@ import PostSearchSort from "../components/PostSearchSort";
 import Fetch from "../components/API/Fetch";
 import GeneralList from "../components/GeneralList";
 import GeneralItem from "../components/GeneralItem";
+import PostListInfinity from "../components/PostListInfinity";
 
 export function About() {
     return (
@@ -74,6 +75,17 @@ export function FetchPage() {
                 uri={'https://jsonplaceholder.typicode.com/todos?_limit=5'}
                 renderSuccess={data => <GeneralList items={data} renderItem={item => <GeneralItem genItem={item}/>}/>}
             />
+        </div>
+    );
+}
+
+export function InfinityPage() {
+    return (
+        <div>
+            <h2>Страница демонстрации бесконечной прокрутки</h2>
+            <p>Получение и рендер данных происходит с помощью компонента React Query.</p>
+            {/*Рендер списка произвольных компонентов*/}
+            <PostListInfinity/>
         </div>
     );
 }
