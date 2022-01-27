@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 import './Articles.css';
+import {useNavigate} from "react-router-dom";
 
 const Articles = () => {
     // React Query
@@ -20,6 +21,8 @@ const Articles = () => {
     const [files, setFiles] = useState();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+
+    const navigate = useNavigate();
 
     async function getArticles() {
         const response = await axios.get('http://localhost:1337/api/articles?populate=cover');
@@ -69,6 +72,7 @@ const Articles = () => {
                                 }
                             </p>
                             <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
+                            <button onClick={() => navigate(`${article.id}`)}>Open</button>
                         </li>
                     )}
                 </ul>

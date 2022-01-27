@@ -7,6 +7,7 @@ import GeneralList from "../components/GeneralList";
 import GeneralItem from "../components/GeneralItem";
 import PostListInfinity from "../components/PostListInfinity";
 import PostItem from "../components/PostItem";
+import Article from "../components/Article";
 
 export function About() {
     return (
@@ -48,7 +49,8 @@ export function ArticlePage() {
     const {articleId} = useParams();
     return (
         <div>
-            Article Page ID: {articleId}
+            <h3>Article Page ID: {articleId}</h3>
+            <Article id={articleId}/>
         </div>
     );
 }
