@@ -6,11 +6,14 @@ import Fetch from "../components/API/Fetch";
 import GeneralList from "../components/GeneralList";
 import GeneralItem from "../components/GeneralItem";
 import PostListInfinity from "../components/PostListInfinity";
+import PostItem from "../components/PostItem";
 
 export function About() {
     return (
         <div>
-            About
+            <h1>О нас</h1>
+            <p>Мы занимаемся front-end разработкой.</p>
+            <p>Keywords: HTML, CSS, JavaScript, React</p>
         </div>
     );
 };
@@ -18,7 +21,7 @@ export function About() {
 export function Contacts() {
     return (
         <div>
-            Contacts
+            <h1>Контакты</h1>
         </div>
     );
 };
@@ -26,7 +29,8 @@ export function Contacts() {
 export function DemosIndexPage() {
     return (
         <div>
-            Demos Index Page
+            <h2>Demos Index Page</h2>
+            <p>В этом разделе представлены демонстрации использования различных технологий React.</p>
         </div>
     );
 }
@@ -49,10 +53,10 @@ export function ArticlePage() {
     );
 }
 
-export function SearchSortPage() {
+export function PostsPage() {
     return (
         <div>
-            <h2>Sort and Search Page</h2>
+            <h2>Post Page (with Sort and Search)</h2>
             <ul style={{padding: "15px"}}>
                 <li>Используются собственные хуки: usePosts(), useFetching(),</li>
                 <li>собственный компонент модального окна,</li>
@@ -61,6 +65,16 @@ export function SearchSortPage() {
             </ul>
             <PostSearchSort/>
         </div>
+    );
+}
+
+export function PostPage() {
+    const {postId} = useParams();
+    return (
+        <Fetch
+            uri={`https://jsonplaceholder.typicode.com/posts/${postId}`}
+            renderSuccess={data => <GeneralItem genItem={data}/>}
+        />
     );
 }
 

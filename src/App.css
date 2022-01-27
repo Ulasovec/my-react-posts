@@ -11,7 +11,31 @@
 }
 
 .content {
+}
 
+nav {
+  padding: 8px;
+}
+
+nav > * {
+  margin: 4px;
+}
+
+.demos {
+  display: flex;
+  justify-content: left;
+}
+
+.demos__menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 20%;
+  max-width: 20%;
+}
+
+.demos__content {
+  width: 100%;
+  /*padding: 15px;*/
 }
 
 button {

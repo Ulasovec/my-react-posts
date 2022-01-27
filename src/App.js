@@ -9,10 +9,10 @@ import {
     Contacts,
     ArticlesPage,
     DemosIndexPage,
-    SearchSortPage,
+    PostsPage,
     ArticlePage,
     FetchPage,
-    InfinityPage
+    InfinityPage, PostPage
 } from "./pages/pages";
 
 // Create a client
@@ -32,7 +32,8 @@ function App() {
                         <Route index element={<DemosIndexPage/>} />
                         <Route path="articles" element={<ArticlesPage/>} />
                         <Route path="articles/:articleId" element={<ArticlePage/>} />
-                        <Route path="search-sort" element={<SearchSortPage/>}/>
+                        <Route path="posts" element={<PostsPage/>}/>
+                        <Route path="posts/:postId" element={<PostPage/>}/>
                         <Route path="fetch" element={<FetchPage/>} />
                         <Route path="infinity" element={<InfinityPage/>}/>
                     </Route>
@@ -87,14 +88,19 @@ function DemosLayout() {
     return (
         <div>
             <h1>Demos Pages</h1>
-            <nav>
-                <Link to="../demos">Demo List</Link>
-                <Link to="articles">Articles</Link>
-                <Link to="search-sort">Search and Sort Posts</Link>
-                <Link to="fetch">Fetch</Link>
-                <Link to="infinity">Infinity List</Link>
-            </nav>
-            <Outlet/>
+            <div className="demos">
+                <nav className="demos__menu">
+                    <Link to="../demos">Demo List</Link>
+                    <Link to="articles">Articles</Link>
+                    <Link to="posts">Search and Sort Posts</Link>
+                    <Link to="fetch">Fetch</Link>
+                    <Link to="infinity">Infinity List</Link>
+                </nav>
+                <div className="demos__content">
+                    <Outlet/>
+                </div>
+
+            </div>
         </div>
     )
 }

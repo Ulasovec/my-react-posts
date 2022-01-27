@@ -3,7 +3,11 @@ import React from 'react';
 const IndexPage = () => {
     return (
         <div>
-            Index Page
+            <h1>Главная страница</h1>
+            <p>
+                Добро пожаловать на сайт программистического кружка
+                <strong>"Вооот такой специалист!"</strong>
+            </p>
         </div>
     );
 };

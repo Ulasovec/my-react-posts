@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useQuery} from "react-query";
 import axios from "axios";
-import PostItem from "./PostItem";
+import GeneralItem from "./GeneralItem";
 
 const PostListInfinity = () => {
     const [limit, setLimit] = useState(5);
@@ -42,7 +42,7 @@ const PostListInfinity = () => {
 
     return (
         <div>
-            {query.data.map(item => <PostItem key={item.id} post={item} ref={lastElement}/>)}
+            {query.data.map(item => <GeneralItem key={item.id} genItem={item} ref={lastElement}/>)}
             <div style={{height: 20, background: 'red'}} ref={lastElement}> </div>
         </div>
     );
