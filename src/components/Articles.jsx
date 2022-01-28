@@ -7,15 +7,15 @@ import {useNavigate} from "react-router-dom";
 const Articles = () => {
     // React Query
     const queryClient = useQueryClient();
-    const query = useQuery('articles', getArticles);
+    const query = useQuery(['articles'], getArticles);
     const mutationCreate = useMutation(postArticle, {
         onSuccess: () => {
-            queryClient.invalidateQueries('articles');
+            queryClient.invalidateQueries(['articles']);
         },
     });
     const mutationDelete = useMutation(deleteArticle, {
         onSuccess: () => {
-            queryClient.invalidateQueries('articles');
+            queryClient.invalidateQueries(['articles']);
         },
     });
     const [files, setFiles] = useState();
