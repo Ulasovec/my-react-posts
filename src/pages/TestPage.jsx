@@ -13,6 +13,11 @@ import GeneralItem from "../components/GeneralItem";
 import GeneralList from "../components/GeneralList";
 import Articles from "../components/Articles";
 
+/**
+ * Сборная солянка для тестирования компонентов.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function TestPage() {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
     const [filter, setFilter] = useState({sortBy: '', query: ''});
@@ -39,7 +44,7 @@ function TestPage() {
 
     return (
         <div className="testPage">
-            <h1>Новости</h1>
+            <h1>Сборная солянка для тестирования</h1>
             {/*<button onClick={fetchPosts}>Добавить посты</button>*/}
             <MyButton onClick={() => setModal(true)}>Добавить новость</MyButton>
             <MyModal visible={modal} setVisible={setModal}>

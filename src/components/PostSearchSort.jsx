@@ -8,6 +8,21 @@ import PostForm from "./PostForm";
 import SearchSortForm from "./SearchSortForm";
 import PostList from "./PostList";
 
+/**
+ * Demo-компонент, используемый для страницы <PostsPage/>.
+ * Демонстрирует получение из фейк-бекенда, удаление, добавление постов.
+ * Использует:
+ * - переиспользуемый пользовательский хук useFetching();
+ * - переиспользуемый компонент <SearchSortForm/>;
+ * - переиспользуемый пользовательский хук usePosts() для сортировки и фильтрации;
+ * - собственные UI-компоненты <MyButton>, <MyModal>.
+ * Демонстрирует:
+ * - передачу данных и колбеков для добавления и удаления постов через props;
+ * - использование модального окна для формы при создании нового поста;
+ * - сортировку и фильтрацию постов.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PostSearchSort = () => {
 
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);

@@ -67,9 +67,9 @@ function Header() {
     return (
         <header>
             <nav>
-                <Link to="/">Home</Link>
-                <Link to="about">About</Link>
-                <Link to="contacts">Contacts</Link>
+                <Link to="/">Главная</Link>
+                <Link to="about">О нас</Link>
+                <Link to="contacts">Контакты</Link>
                 <Link to="demos">Demos</Link>
                 <Link to="testpage">Test Page</Link>
             </nav>
@@ -91,7 +91,7 @@ function DemosLayout() {
             <div className="demos">
                 <nav className="demos__menu">
                     <Link to="../demos">Demo List</Link>
-                    <Link to="articles">Articles</Link>
+                    <Link to="articles">Strapi Backend</Link>
                     <Link to="posts">Search and Sort Posts</Link>
                     <Link to="fetch">Fetch</Link>
                     <Link to="infinity">Infinity List</Link>

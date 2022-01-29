@@ -2,6 +2,18 @@ import React, {useRef} from 'react';
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 
+/**
+ * Demo-компонент для страницы <ArticlePage/> (http://localhost:3000/demos/articles/:id).
+ * Рендерит отдельную статью, запрашивая ее у бекенда.
+ * Позволяет модифицировать на бекенде некоторые поля статьи.
+ * Использует:
+ * - библиотеку react-query.
+ * Демонстрирует:
+ * - простую неуправляемую форму для отправки данных на бекенд.
+ * @param id string - ID-идентификатор статьи.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Article = ({id}) => {
     const queryClient = useQueryClient();
     const query = useQuery(['articles', id], async () => {
@@ -27,6 +39,7 @@ const Article = ({id}) => {
 
     return (
         <div>
+            {/*простая неуправляемая форма*/}
             <form onSubmit={(event) => {
                 event.preventDefault();
                 const formData = new FormData(event.currentTarget);

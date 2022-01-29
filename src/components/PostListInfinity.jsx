@@ -3,6 +3,13 @@ import {useQuery} from "react-query";
 import axios from "axios";
 import GeneralItem from "./GeneralItem";
 
+/**
+ * Демонстрация бесконечной прокрутки.
+ * !!! Еще есть ошибки в использовании useRef().
+ * Используется react-query. Но по-простому пока.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PostListInfinity = () => {
     const [limit, setLimit] = useState(5);
     const query = useQuery(['postAction', limit], () => getPost(limit), {keepPreviousData: true});

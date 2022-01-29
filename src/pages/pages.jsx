@@ -9,6 +9,11 @@ import PostListInfinity from "../components/PostListInfinity";
 import PostItem from "../components/PostItem";
 import Article from "../components/Article";
 
+/**
+ * Здесь собраны короткие компоненты-страницы.
+ * Более длинные страницы вынесены в отдельные файлы.
+ */
+
 export function About() {
     return (
         <div>
@@ -84,7 +89,7 @@ export function FetchPage() {
     return (
         <div>
             <h2>Страница демонстрации компонента Fetch</h2>
-            <p>Получение и рендер данных с помощью компонента Fetch
+            <p>Получение и рендер данных с помощью собственного компонента Fetch
                 (внутри свой хук useFetch())</p>
             {/*Рендер списка произвольных компонентов*/}
             <Fetch
@@ -99,7 +104,7 @@ export function InfinityPage() {
     return (
         <div>
             <h2>Страница демонстрации бесконечной прокрутки</h2>
-            <p>Получение и рендер данных происходит с помощью компонента React Query.</p>
+            <p>Получение и рендер данных происходит с помощью компонента React Query (по-простому).</p>
             {/*Рендер списка произвольных компонентов*/}
             <PostListInfinity/>
         </div>

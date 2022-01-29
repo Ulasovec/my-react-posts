@@ -6,6 +6,19 @@ import {useNavigate} from "react-router-dom";
 import {usePosts} from "../hooks/usePosts";
 import SearchSortForm from "./SearchSortForm";
 
+/**
+ * Demo-компонент для страницы <ArticlesPage/> (http://localhost:3000/demos/articles),
+ * демонстрирующий работу с back-end "strapi v4".
+ * Запрашивает список статей, удаляет и создает новую статью с картинкой.
+ * Использует:
+ * - библиотеку "react-query";
+ * - пользовательский хук usePosts() для сортировки и фильтрации списка статей;
+ * - переиспользуемый компонент <SearchSortForm>.
+ * Демонстрирует:
+ * - отправку файла с картинкой, привязанной к новой статье, на back-end strapi.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Articles = () => {
     // React Query
     const queryClient = useQueryClient();
