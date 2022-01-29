@@ -16,7 +16,8 @@
 
 .article__form {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 15px;
 }
