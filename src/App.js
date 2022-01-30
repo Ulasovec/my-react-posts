@@ -14,6 +14,7 @@ import GeneralList from "./components/GeneralList";
 import {QueryClient, QueryClientProvider} from "react-query";
 import Articles from "./components/Articles";
 import PostAction from "./components/PostAction";
+import {Contexst} from "./Contexst/Contexst";
 // Create a client
 const queryClient = new QueryClient();
 
@@ -22,7 +23,7 @@ function App() {
     const [filter, setFilter] = useState({sortBy: '', query: ''});
     const [modal, setModal] = useState(false);
     const sortedAndFilteredPosts = usePosts(posts, filter.sortBy, filter.query);
-
+    const [select,setSelect] = useState(0);
     // useFetching - хук-обертка для callback()
     // axios выбрасывает исключение даже при кодах возврата типа 404 (страница не найдена)
     const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
@@ -90,12 +91,12 @@ function App() {
                     </>
                 )}/>}
             />
-
+<Contexst.Provider value={[select,setSelect]}>
             <QueryClientProvider client={queryClient}>
-
                 <Articles />
                 <PostAction/>
             </QueryClientProvider>
+</Contexst.Provider>
         </div>
     );
 }

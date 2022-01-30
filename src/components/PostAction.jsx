@@ -7,7 +7,6 @@ import NewPostsAction from "./NewPostsAction";
 const PostAction = () => {
     const [limit, setLimit] = useState(5);
     const query = useQuery(['postAction', limit], () => getPost(limit) , { keepPreviousData : true });
-    //const [posts,setPost]=useState([query.data]);
     const lastElement=useRef();
     const observer=useRef();
 

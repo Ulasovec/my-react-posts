@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 import './Articles.css';
+import StarRating from "./UI/StarRating";
 
 const Articles = () => {
     const queryClient = useQueryClient();
@@ -66,6 +67,7 @@ const Articles = () => {
                                 : null
                             }
                         </p>
+                        <div><StarRating totalStars={5}/></div>
                         <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
                     </li>
                 )}
