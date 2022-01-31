@@ -69,7 +69,7 @@ const Articles = () => {
                                 : null
                             }
                         </p>
-                        <div><StarRating totalStars={5} id={article.id}/></div>
+                        <div><StarRating totalStars={5} id={article.id} rating={article.attributes.rating}/></div>
                         <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
                     </li>
                 )}
