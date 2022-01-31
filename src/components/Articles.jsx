@@ -5,6 +5,7 @@ import './Articles.css';
 import {useNavigate} from "react-router-dom";
 import {usePosts} from "../hooks/usePosts";
 import SearchSortForm from "./SearchSortForm";
+import StarRating from "./UI/rating/StarRating";
 
 /**
  * Demo-компонент для страницы <ArticlesPage/> (http://localhost:3000/demos/articles),
@@ -35,6 +36,7 @@ const Articles = () => {
             queryClient.invalidateQueries(['articles']);
         },
     });
+    const mutationMod = useMutation(modifyArticleRating);
 
     // Состояния для управляемой формы создания новой статьи
     const [files, setFiles] = useState();
@@ -65,6 +67,12 @@ const Articles = () => {
         return axios.delete(`http://localhost:1337/api/articles/${id}`);
     }
 
+    function modifyArticleRating({id, rating}) {
+        return axios.put(`http://localhost:1337/api/articles/${id}`,
+            {data: {rating: rating}}
+        );
+    }
+
     // Отправка новой статьи с картинкой на бекенд
     function handleSubmit(e) {
         e.preventDefault();
@@ -93,8 +101,8 @@ const Articles = () => {
                     filter={filter}
                     setFilter={setFilter}
                     sortSelectOptions={[
-                        { value: 'attributes.title', name: 'По заголовку' },
-                        { value: 'attributes.body', name: 'По описанию' },
+                        {value: 'attributes.title', name: 'По заголовку'},
+                        {value: 'attributes.body', name: 'По описанию'},
                     ]}
                 />
                 <ul className="article__list">
@@ -110,6 +118,12 @@ const Articles = () => {
                                     : null
                                 }
                             </p>
+                            <StarRating
+                                rating={article.attributes.rating}
+                                onChange={(rating) =>
+                                    mutationMod.mutate({id: article.id, rating: rating})
+                                }
+                            />
                             <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
                             <button onClick={() => navigate(`${article.id}`)}>Open</button>
                         </li>
