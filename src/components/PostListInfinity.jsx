@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {useQuery} from "react-query";
+import {useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 import GeneralItem from "./GeneralItem";
 
@@ -11,6 +11,7 @@ import GeneralItem from "./GeneralItem";
  * @constructor
  */
 const PostListInfinity = () => {
+    const queryClient = useQueryClient();
     const [limit, setLimit] = useState(5);
     const query = useQuery(['postAction', limit], () => getPost(limit), {keepPreviousData: true});
     //const [posts,setPost]=useState([query.data]);
@@ -38,6 +39,10 @@ const PostListInfinity = () => {
         return response.data;
     }
 
+    function deletePost(delPost) {
+        queryClient.setQueryData(['postAction', limit], old => old.filter(post => post.id !== delPost.id));
+    }
+
     if (query.isLoading) {
         return <span>Loading...</span>
     }
@@ -49,7 +54,7 @@ const PostListInfinity = () => {
 
     return (
         <div>
-            {query.data.map(item => <GeneralItem key={item.id} genItem={item} ref={lastElement}/>)}
+            {query.data.map(item => <GeneralItem key={item.id} genItem={item} deleteItem={deletePost}/>)}
             <div style={{height: 20, background: 'red'}} ref={lastElement}> </div>
         </div>
     );

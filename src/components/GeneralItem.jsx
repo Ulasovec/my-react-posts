@@ -9,7 +9,7 @@ import './GeneralItem.css'
  * @returns {JSX.Element}
  * @constructor
  */
-const GeneralItem = ({genItem}) => {
+const GeneralItem = ({genItem, deleteItem}) => {
     return (
         <div className="generalItem">
             {
@@ -18,6 +18,10 @@ const GeneralItem = ({genItem}) => {
                     .map(([key, value]) =>
                         <p key={key}><strong>{key}</strong>: {value}</p>
                     )
+            }
+            { deleteItem
+                ? <button onClick={() => deleteItem(genItem)}>Delete</button>
+                : null
             }
         </div>
     );
