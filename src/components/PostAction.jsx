@@ -3,12 +3,13 @@ import {useQuery} from "react-query";
 import axios from "axios";
 import PostsAction from "./PostsAction";
 import NewPostsAction from "./NewPostsAction";
-
+import Header from "./Header/Header";
 const PostAction = () => {
     const [limit, setLimit] = useState(5);
     const query = useQuery(['postAction', limit], () => getPost(limit) , { keepPreviousData : true });
     const lastElement=useRef();
     const observer=useRef();
+
 
     useEffect(()=> {
         if (query.isFetching) return;
@@ -28,8 +29,14 @@ const PostAction = () => {
     async function getPost(limit) {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
         // console.log('GET: ', response.data);
+
         return response.data;
     }
+
+        const deletePost = (delPost) => {
+            console.log('Delete',delPost.id)
+        }
+
     if (query.isLoading) {
         return <span>Loading...</span>
     }
@@ -43,7 +50,8 @@ const PostAction = () => {
 
     return (
         <div>
-            {query.data.map(item => <PostsAction key={item.id} item={item} ref={lastElement}/>)}
+            <Header/>
+            {query.data.map(item => <PostsAction key={item.id} item={item} ref={lastElement} deletePost={deletePost}/>)}
             {/*{posts.map(item => <NewPostsAction key={item.id} item={item}/>)}*/}
             <div style={{height:20, background:'red' }} ref={lastElement}> </div>
 

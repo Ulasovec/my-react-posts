@@ -3,6 +3,7 @@ import {useMutation, useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 import './Articles.css';
 import StarRating from "./UI/StarRating";
+import Header from "./Header/Header";
 
 const Articles = () => {
     const queryClient = useQueryClient();
@@ -54,6 +55,7 @@ const Articles = () => {
 
     return (
         <div className="articles">
+            <Header/>
             <h2>Articles from strapi-backend</h2>
             <ul>
                 {query.data.data.map(article =>
@@ -67,7 +69,7 @@ const Articles = () => {
                                 : null
                             }
                         </p>
-                        <div><StarRating totalStars={5}/></div>
+                        <div><StarRating totalStars={5} id={article.id}/></div>
                         <button onClick={() => mutationDelete.mutate(article.id)}>Delete</button>
                     </li>
                 )}

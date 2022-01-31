@@ -8,13 +8,17 @@ import {Contexst} from "../../Contexst/Contexst";
 export const createArray = length => [...Array(length)];
 
 
-    export default function StarRating({ style = {}, totalStars = 10, ...props }) {
+    export default function StarRating({ style = {}, totalStars = 10,...props }) {
 
         const [selectedStars, setSelectedStars] = useState(0);
         const [select,setSelect]= useContext(Contexst);
+        const id = props.id
 
-        useEffect(()=> setSelect(selectedStars) ,[selectedStars] )
-console.log(select);
+        useEffect(()=> setSelect(selectedStars) ,[selectedStars])
+
+        console.log('Рейтинг',select);
+        console.log('Индификатор',id);
+
         return (
             <div style={{ padding: 5, ...style }} {...props}>
                 {!selectedStars ? createArray(totalStars).map((n, i) => (
