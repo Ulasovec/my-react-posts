@@ -7,27 +7,33 @@ import {Contexst} from "./Contexst/Contexst";
 import {Routes, Route, Link} from "react-router-dom";
 import Home from "./Pages/FirstPage/Home";
 import PostIdPage from "./components/PostIdPage";
+import LoginForm from "./Pages/Registration/LoginForm";
+import {ModalBoot} from "./components/UI/ModalBoot";
+import Admins from "./Pages/Admins";
 
 // Create a client
 const queryClient = new QueryClient();
+
 function App() {
-    const [select,setSelect] = useState(0);
-    const [id,setId]=useState(0)
+    const [admins, setAdmins] = useState(false);
+    console.log(admins);
 
 
     return (
         <div className="App">
 
-<Contexst.Provider value={[select,setSelect,id,setId]}>
-            <QueryClientProvider client={queryClient}>
-                <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route path='/Articles' element={<Articles/>}/>
-                    <Route exact path='/Posts' element={<PostAction/>}/>
-                    <Route exact path="/posts/:id" element = {<PostIdPage/>}/>
-                </Routes>
-            </QueryClientProvider>
-</Contexst.Provider>
+            <Contexst.Provider value={[admins, setAdmins]}>
+                <QueryClientProvider client={queryClient}>
+                    <Routes>
+                        <Route path='/' element={<Home/>}/>
+                        <Route exact path='/Admins' element={<ModalBoot/>}/>
+                        <Route exact path='/Admins/:id' element={<Admins/>}/>
+                        <Route path='/Articles' element={<Articles/>}/>
+                        <Route exact path='/Posts' element={<PostAction/>}/>
+                        <Route exact path="/posts/:id" element={<PostIdPage/>}/>
+                    </Routes>
+                </QueryClientProvider>
+            </Contexst.Provider>
 
         </div>
     );

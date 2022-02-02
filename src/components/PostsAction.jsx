@@ -6,7 +6,6 @@ const PostsAction = ({item,deletePost}) => {
     const navigate = useNavigate();
     return (
         <div>
-
             <h2>{item.id}.{item.title}</h2>
             <p>{item.body}</p>
             <button onClick={()=> navigate(`/posts/${item.id}`)}>Открыть</button>
