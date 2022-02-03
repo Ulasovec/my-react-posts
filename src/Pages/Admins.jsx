@@ -1,22 +1,27 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Header from "../components/Header/Header";
 import {useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import Avatar from '../Img/admin.jpg'
 import Articles from "../components/Articles";
+import {Contexst} from "../Contexst/Contexst";
+
 
 const Admins = () => {
 
+    const [admins,setAdmins]=useContext(Contexst)
     const query = useQuery('admins', getAdmins);
-    const params=useParams();
+    const params = useParams();
+
 
     async function getAdmins() {
-        const response = await axios.get(`http://localhost:1337/api/admins/${params.id}?populate=cover`);
+        const response = await axios.get(`http://localhost:1337/api/admins/${params.id}`);
         console.log('GET: ', response.data);
         return response.data;
-
     }
+    useEffect(()=>setAdmins({...admins, name:query.data?.data.attributes.Name}), [query.isLoading]);
+
     return (
         <div>
             <Header/>

@@ -8,8 +8,9 @@ import MyButton from "../../components/UI/button/MyButton";
 export default function LoginForm() {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-    const [admins, setAdmins]=useContext(Contexst)
+    const [admins,setAdmins]=useContext(Contexst)
     const navigate = useNavigate();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,14 +19,13 @@ export default function LoginForm() {
             password:password,
         };
         const id = admin.filter(item=> item.name && item.password === obj.name && obj.password);
-        if (admin[0].name === name && admin[0].password === password ||
-            admin[1].name === name && admin[1].password === password ||
-            admin[2].name === name && admin[2].password === password ) {
-            setAdmins(true);
-             navigate(`/Admins/${id[0].id}`);
+        if (admin.filter(item=> item.name && item.password === obj.name && obj.password).join('')) {
+           setAdmins({id:id[0].id ,isAdmin:true, name:'name'});
+           navigate(`/Admins/${id[0].id}`);
+
         }
         else {
-            setAdmins(false);
+
             setPassword("");
             setName("");
         }

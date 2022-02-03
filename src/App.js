@@ -7,7 +7,6 @@ import {Contexst} from "./Contexst/Contexst";
 import {Routes, Route, Link} from "react-router-dom";
 import Home from "./Pages/FirstPage/Home";
 import PostIdPage from "./components/PostIdPage";
-import LoginForm from "./Pages/Registration/LoginForm";
 import {ModalBoot} from "./components/UI/ModalBoot";
 import Admins from "./Pages/Admins";
 
@@ -15,8 +14,9 @@ import Admins from "./Pages/Admins";
 const queryClient = new QueryClient();
 
 function App() {
-    const [admins, setAdmins] = useState(false);
+    const [admins, setAdmins] = useState({id:0, isAdmin:false, name:'name'});
     console.log(admins);
+
 
 
     return (
