@@ -12,6 +12,8 @@ import {useFetching} from "../../hooks/useFetching";
 import axios from "axios";
 import Header from "../../components/Header/Header";
 
+
+
 const Home = () => {
     const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
     const [filter, setFilter] = useState({sortBy: '', query: ''});
@@ -43,6 +45,7 @@ const Home = () => {
 
             <div className="App">
                 <Header/>
+
                 <h1>Новости</h1>
                 {/*<button onClick={fetchPosts}>Добавить посты</button>*/}
                 <MyButton onClick={() => setModal(true)}>Добавить новость</MyButton>
