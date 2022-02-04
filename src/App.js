@@ -14,6 +14,7 @@ import {
     FetchPage,
     InfinityPage, PostPage
 } from "./pages/pages";
+import LoginForm from "./components/LoginForm";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function App() {
                     <Route path="about" element={<About/>} />
                     <Route path="contacts" element={<Contacts/>} />
                     <Route path="testpage" element={<TestPage/>} />
+                    <Route path="login" element={<LoginForm/>} />
                     <Route path="demos" element={<DemosLayout/>}>
                         <Route index element={<DemosIndexPage/>} />
                         <Route path="articles" element={<ArticlesPage/>} />
