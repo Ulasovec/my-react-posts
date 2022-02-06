@@ -4,11 +4,11 @@ import {useState} from "react";
 import React from "react";
 import LoginForm from "../../Pages/Registration/LoginForm";
 import {useNavigate} from "react-router-dom";
+import RegAdminsForm from "./RegAdminsForm";
 
-export function ModalBoot() {
+export function ModalWindows() {
     const [show, setShow] = useState(true);
     const handleClose = () => {setShow(false);navigate('/');}
-
     const navigate = useNavigate();
     return (
         <>
@@ -16,11 +16,8 @@ export function ModalBoot() {
                 <Modal.Header closeButton>
                     <Modal.Title>Заполните поля</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><LoginForm/></Modal.Body>
+                <Modal.Body><RegAdminsForm/></Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> navigate('/Registration') }>
-                        Регистрация
-                    </Button>
                     <Button variant="secondary" onClick={handleClose}>
                         На главную
                     </Button>

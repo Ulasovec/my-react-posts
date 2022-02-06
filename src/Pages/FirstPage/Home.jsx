@@ -11,31 +11,35 @@ import {usePosts} from "../../hooks/usePosts";
 import {useFetching} from "../../hooks/useFetching";
 import axios from "axios";
 import Header from "../../components/Header/Header";
-
+import {useDispatch, useSelector} from "react-redux";
+import {postsSlice} from "../../app/features/posts/PostsSlace";
+import {setPosts,deletePosts} from "../../app/features/posts/PostsSlace";
 
 
 const Home = () => {
-    const [posts, setPosts] = useState([{id: 1, title: 'First post', body: 'Body of post'}]);
+
+    const posts = useSelector(state => state.posts.value)
     const [filter, setFilter] = useState({sortBy: '', query: ''});
     const [modal, setModal] = useState(false);
     const sortedAndFilteredPosts = usePosts(posts, filter.sortBy, filter.query);
+    const dispatch = useDispatch()
 
     // useFetching - хук-обертка для callback()
     // axios выбрасывает исключение даже при кодах возврата типа 404 (страница не найдена)
     const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5');
-        setPosts(response.data);
+        dispatch(setPosts(response.data));
     });
 
     // Функцию-обертку вокруг callback, возвращенную хуком useFetching, надо явно вызывать:
     useEffect(fetchPosts, []);
 
     const addPost = (newPost) => {
-        setPosts([newPost, ...posts])
+        dispatch(setPosts(newPost));
         setModal(false);
     };
     const deletePost = (delPost) => {
-        setPosts(posts.filter(post => post.id !== delPost.id))
+        dispatch(deletePosts(delPost));
     }
 
 
@@ -45,7 +49,6 @@ const Home = () => {
 
             <div className="App">
                 <Header/>
-
                 <h1>Новости</h1>
                 {/*<button onClick={fetchPosts}>Добавить посты</button>*/}
                 <MyButton onClick={() => setModal(true)}>Добавить новость</MyButton>

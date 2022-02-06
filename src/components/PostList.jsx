@@ -3,6 +3,7 @@ import PostItem from "./PostItem";
 import './PostList.css'
 
 const PostList = ({posts, deletePost}) => {
+
     return (
         <div className="postList">
             <h2>Post List</h2>

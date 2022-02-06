@@ -8,7 +8,8 @@ import Home from "./Pages/FirstPage/Home";
 import PostIdPage from "./components/PostIdPage";
 import {ModalBoot} from "./components/UI/ModalBoot";
 import Admins from "./Pages/Admins";
-
+import RegAdminsForm from "./Pages/Registration/RegAdminsForm";
+import {ModalWindows} from "./Pages/Registration/ModalWindows";
 // Create a client
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
                     <Route path='/Articles' element={<Articles/>}/>
                     <Route exact path='/Posts' element={<PostAction/>}/>
                     <Route exact path="/posts/:id" element={<PostIdPage/>}/>
+                    <Route exact path='/Registration' element={<ModalWindows/>}/>
                 </Routes>
             </QueryClientProvider>
 

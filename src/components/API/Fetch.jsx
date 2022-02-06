@@ -3,8 +3,9 @@
  * с помощью принимаемой функции renderSuccess.
  * Использует хук useFetch().
  */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useFetch} from "../../hooks/useFetch";
+
 
 function Fetch({
                    uri,
@@ -13,10 +14,14 @@ function Fetch({
                    renderError = error => (<pre>{error}</pre>)
                }) {
     const {data, error, isLoading} = useFetch(uri);
+
+
+
     console.log({data, error, isLoading});
     if (isLoading) return loadingFallback;
     if (error) return renderError(error);
     if (data) return renderSuccess(data);
+
     return (
         <>
             <p>Nothing to render !!!</p>

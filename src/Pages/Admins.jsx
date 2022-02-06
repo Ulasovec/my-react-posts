@@ -22,7 +22,7 @@ const Admins = () => {
         return response.data;
     }
 
-    useEffect(() => dispatch(setAdmins({name: query.data?.data.attributes.Name})), [query.isLoading]);
+    useEffect(() => dispatch(setAdmins({name: query.data?.data.attributes.name})), [query.isLoading]);
 
     return (
         <div>
