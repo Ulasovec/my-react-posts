@@ -15,6 +15,7 @@ import {
     InfinityPage, PostPage
 } from "./pages/pages";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ function App() {
                     <Route path="contacts" element={<Contacts/>} />
                     <Route path="testpage" element={<TestPage/>} />
                     <Route path="login" element={<LoginForm/>} />
+                    <Route path="register" element={<RegisterForm isError={true} />} />
                     <Route path="demos" element={<DemosLayout/>}>
                         <Route index element={<DemosIndexPage/>} />
                         <Route path="articles" element={<ArticlesPage/>} />

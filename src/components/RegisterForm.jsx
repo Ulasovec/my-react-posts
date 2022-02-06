@@ -2,42 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useForm} from "react-hook-form";
 import classes from './LoginForm.module.css';
-import {loginI18n} from "./LoginFormI18n";
+import {registerI18n} from "./LoginFormI18n";
 
 /**
  * Компонент с использованием PropTypes & DefaultProps (внизу пример).
- * @param isError bool - Надо ли отображать сообщение об ошибке.
- * @param errorMessage string - расшифровка возможной ошибки при логине
- * @param disabled bool - Сделать кнопку submit неактивной
- * @param onLogin func - callback with { identifier, password } object parameter
+ * @param isError bool - Надо ли отображать ошибку при регистрации.
+ * @param errorMessage string - Расшифровка ошибки, возникающей при регистрации
+ * @param disabled - Сделать кнопку submit неактивной
+ * @param onRegister func - callback with { username, email, password } object parameter
  * @param i18n object - Все надписи и сообщения (см. "./LoginFormI18n").
- * @param noForgotPassword bool - Не показывать ссылку "Забыли пароль?"
- * @param onForgotPassword func - callback with {identifier} object parameter
  * @returns {JSX.Element}
  * @constructor
  */
 
-const LoginForm = ({
-
-                       isError = false,
-                       errorMessage,
-                       disabled = false,
-                       onLogin = f => console.log('onLogin: ', f),
-                       i18n = {},
-                       noForgotPassword = false,
-                       onForgotPassword = f => console.log('onForgotPassword: ', f),
-                   }) => {
+const RegisterForm = ({
+                          isError = false,
+                          errorMessage,
+                          disabled = false,
+                          onRegister = f => console.log('onRegister: ', f),
+                          i18n = {}
+                      }) => {
     // Слияние i18n
-    i18n = {...loginI18n, ...i18n};
+    i18n = {...registerI18n, ...i18n};
     // Хук react-hook-form
     const {register, handleSubmit, watch, formState: {errors, isValid}} = useForm({
         mode: "onChange"
     });
     const onSubmit = data => {
         console.log('Result: ', data);
-        onLogin(data);
+        onRegister(data);
     }
-    //console.log('Identifier watch: ', watch('identifier')); // watch input value by passing the name of it
+    //console.log('USERNAME watch: ', watch('username')); // watch input value by passing the name of it
 
     return (
         <div className={classes.loginForm}>
@@ -52,17 +47,29 @@ const LoginForm = ({
                 </div>
 
                 {/* include validation with required or other standard HTML validation rules */}
-                <label htmlFor="identifier">{i18n.identifier.title}</label>
-                <input type="text" {...register('identifier', {
-                    required: i18n.identifier.required,
+                <label htmlFor="username">{i18n.username.title}</label>
+                <input type="text" {...register('username', {
+                    required: i18n.username.required,
                     minLength: {
                         value: 2,
-                        message: i18n.identifier.validation
+                        message: i18n.username.validation
                     },
                     validate: true
                 })} />
                 {/* errors will return when field validation fails  */}
-                {errors.identifier && <p>{errors.identifier.message}</p>}
+                {errors.username && <p>{errors.username.message}</p>}
+
+                {/* register your input into the hook by invoking the "register" function */}
+                <label htmlFor="email">{i18n.email.title}</label>
+                <input type="text" {...register('email', {
+                    required: i18n.email.required,
+                    pattern: {
+                        value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                        message: i18n.email.validation
+                    },
+                })} />
+                {/* errors will return when field validation fails  */}
+                {errors.email && <p>{errors.email.message}</p>}
 
                 {/* include validation with required or other standard HTML validation rules */}
                 <label htmlFor="password">{i18n.password.title}</label>
@@ -77,31 +84,22 @@ const LoginForm = ({
                 {/* errors will return when field validation fails  */}
                 {errors.password && <p>{errors.password.message}</p>}
 
-                {!noForgotPassword &&
-                    <a onClick={() => onForgotPassword({identifier: watch('identifier')})}>
-                        {i18n.forgotPassword}
-                    </a>}
-
                 <input disabled={disabled || !isValid} type="submit" value={i18n.submit}/>
             </form>
         </div>
     );
 };
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
     isError: PropTypes.bool,
     errorMessage: PropTypes.string,
     disabled: PropTypes.bool,
-    onLogin: PropTypes.func,
-    i18n: PropTypes.object,
-    noForgotPassword: PropTypes.bool,
-    onForgotPassword: PropTypes.func
+    onRegister: PropTypes.func,
+    i18n: PropTypes.object
 };
 
 /*LoginForm.defaultProps = {
-    isError: false,
-    onLogin: f => console.log('onLogin: ', f),
-    onForgotPassword: f => console.log('onForgotPassword: ', f),
+    onRegister: f => console.log('onRegister: ', f),
 };*/
 
-export default LoginForm;
+export default RegisterForm;
