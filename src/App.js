@@ -16,6 +16,7 @@ import {
 } from "./pages/pages";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import UserManager from "./components/UserManager";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -77,6 +78,8 @@ function Header() {
                 <Link to="demos">Demos</Link>
                 <Link to="testpage">Test Page</Link>
             </nav>
+            <UserManager />
+            {/*<UserManager user={{name: 'Ivan Ivanov'}}/>*/}
         </header>
     )
 }
