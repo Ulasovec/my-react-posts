@@ -16,14 +16,17 @@ import {
 } from "./pages/pages";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
-import UserManager from "./components/UserManager";
+import {createContext, useContext, useState} from "react";
+import UserManagerWrapper from "./components/UserManagerWrapper";
 
-// Create a client
-const queryClient = new QueryClient();
+const queryClient = new QueryClient(); // Create a react-query client
+export const AppContext = createContext();
 
 function App() {
+    const [jwt, setJwt] = useState();
 
     return (
+        <AppContext.Provider value={{jwt, setJwt}}>
         <QueryClientProvider client={queryClient}>
             <Routes>
                 <Route path="/" element={<Layout/>}>
@@ -46,6 +49,7 @@ function App() {
                 <Route path="*" element={<Whoops404/>} />
             </Routes>
         </QueryClientProvider>
+        </AppContext.Provider>
     );
 }
 
@@ -78,7 +82,7 @@ function Header() {
                 <Link to="demos">Demos</Link>
                 <Link to="testpage">Test Page</Link>
             </nav>
-            <UserManager />
+            <UserManagerWrapper />
             {/*<UserManager user={{name: 'Ivan Ivanov'}}/>*/}
         </header>
     )

@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import MyModal from "./UI/modal/MyModal";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
@@ -23,23 +23,28 @@ function reducer(state, action) {
 /**
  *
  * @param user object - undefined or userInfo (useQueryMe().data)
- * @param doUserRequest func - action types: [logout, login, register, profile]
+ * @param status string - [success, loading, error, idle] or undefined
+ * @param errorMessage string - Error message or undefined
+ * @param doUserRequest func - action types: [logout, clear, login, register, profile]
  * @returns {JSX.Element}
  * @constructor
  */
-const UserManager = ({user, doUserRequest = f => f}) => {
+const UserManagerDraft = ({user, status, errorMessage, doUserRequest = f => f}) => {
     const [dialogs, dialogsDispatch] = useReducer(reducer, {visible: false, dialog: undefined});
 
-    function handleRequests(data) {
-        dialogsDispatch({type: 'hide'});
-        doUserRequest(data);
-    }
+    useEffect(() => {
+        if(status === 'success') dialogsDispatch({type: 'hide'});
+    }, [status]);
+
+    useEffect(() => {
+        doUserRequest({type: 'clear'});
+    }, [dialogs]);
 
     return (
         <div>
             {user
                 ? <span>
-                    <button onClick={() => dialogsDispatch({type: 'showProfile'})}>{user.username}</button>
+                    <button onClick={() => dialogsDispatch({type: 'showProfile'})}>{user.name}</button>
                     /
                     <button onClick={() => doUserRequest({type: 'logout'})}>Logout</button>
                 </span>
@@ -53,25 +58,28 @@ const UserManager = ({user, doUserRequest = f => f}) => {
                 visible={dialogs.visible}
                 setVisible={visible => dialogsDispatch({type: visible ? 'show' : 'hide'})}
             >
-                {dialogs.visible && dialogs.dialog === 'login' &&
+                {dialogs.dialog === 'login' &&
                     <LoginForm
+                        isError={status === 'error'}
+                        errorMessage={errorMessage}
+                        disabled={status === 'loading'}
                         noForgotPassword
-                        onLogin={(data) => handleRequests({type: 'login', payload: data})}
+                        onLogin={(data) => doUserRequest({type: 'login', payload: data})}
                     />}
-                {dialogs.visible && dialogs.dialog === 'register' &&
+                {dialogs.dialog === 'register' &&
                     <RegisterForm
-                        onRegister={(data) => handleRequests({type: 'register', payload: data})}
+                        isError={status === 'error'}
+                        errorMessage={errorMessage}
+                        disabled={status === 'loading'}
+                        onRegister={(data) => doUserRequest({type: 'register', payload: data})}
                     />}
-                {dialogs.visible && dialogs.dialog === 'profile' &&
+                {dialogs.dialog === 'profile' &&
                     <div>
-                        <h2>Profile</h2>
-                        <p>Username: {user.username}</p>
-                        <p>E-male: {user.email}</p>
-                        <p>Created at: {user.createdAt}</p>
+                        Profile
                     </div>}
             </MyModal>
         </div>
     );
 };
 
-export default UserManager;
+export default UserManagerDraft;
