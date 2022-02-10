@@ -74,7 +74,7 @@ function Layout() {
 
 function Header() {
     return (
-        <header>
+        <header className="main__menu">
             <nav>
                 <Link to="/">Главная</Link>
                 <Link to="about">О нас</Link>

@@ -2,6 +2,7 @@ import React, {useReducer} from 'react';
 import MyModal from "./UI/modal/MyModal";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import {userManagerI18n} from "./LoginFormI18n";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -9,6 +10,8 @@ function reducer(state, action) {
             return {...state, visible: true};
         case 'hide':
             return {...state, visible: false};
+        case 'close':
+            return {dialog: '', visible: false};
         case 'showLogin':
             return {visible: true, dialog: 'login'};
         case 'showRegister':
@@ -24,14 +27,19 @@ function reducer(state, action) {
  *
  * @param user object - undefined or userInfo (useQueryMe().data)
  * @param doUserRequest func - action types: [logout, login, register, profile]
+ * @param i18n object - titles in locale
  * @returns {JSX.Element}
  * @constructor
  */
-const UserManager = ({user, doUserRequest = f => f}) => {
+const UserManager = ({
+                         user,
+                         doUserRequest = f => f,
+                         i18n = userManagerI18n
+                     }) => {
     const [dialogs, dialogsDispatch] = useReducer(reducer, {visible: false, dialog: undefined});
 
     function handleRequests(data) {
-        dialogsDispatch({type: 'hide'});
+        dialogsDispatch({type: 'close'});
         doUserRequest(data);
     }
 
@@ -41,30 +49,30 @@ const UserManager = ({user, doUserRequest = f => f}) => {
                 ? <span>
                     <button onClick={() => dialogsDispatch({type: 'showProfile'})}>{user.username}</button>
                     /
-                    <button onClick={() => doUserRequest({type: 'logout'})}>Logout</button>
+                    <button onClick={() => doUserRequest({type: 'logout'})}>{i18n.logout}</button>
                 </span>
                 : <span>
-                    <button onClick={() => dialogsDispatch({type: 'showLogin'})}>Login</button>
+                    <button onClick={() => dialogsDispatch({type: 'showLogin'})}>{i18n.login}</button>
                     /
-                    <button onClick={() => dialogsDispatch({type: 'showRegister'})}>Register</button>
+                    <button onClick={() => dialogsDispatch({type: 'showRegister'})}>{i18n.register}</button>
                 </span>
             }
             <MyModal
                 visible={dialogs.visible}
-                setVisible={visible => dialogsDispatch({type: visible ? 'show' : 'hide'})}
+                setVisible={visible => dialogsDispatch({type: visible ? 'show' : 'close'})}
             >
-                {dialogs.visible && dialogs.dialog === 'login' &&
+                {dialogs.dialog === 'login' &&
                     <LoginForm
                         noForgotPassword
                         onLogin={(data) => handleRequests({type: 'login', payload: data})}
                     />}
-                {dialogs.visible && dialogs.dialog === 'register' &&
+                {dialogs.dialog === 'register' &&
                     <RegisterForm
                         onRegister={(data) => handleRequests({type: 'register', payload: data})}
                     />}
-                {dialogs.visible && dialogs.dialog === 'profile' &&
+                {dialogs.dialog === 'profile' &&
                     <div>
-                        <h2>Profile</h2>
+                        <h2>{i18n.profile}</h2>
                         <p>Username: {user.username}</p>
                         <p>E-male: {user.email}</p>
                         <p>Created at: {user.createdAt}</p>

@@ -38,3 +38,10 @@ export const registerI18n = {
     },
     errorMessage: 'E-mail already exists'
 }
+
+export const userManagerI18n = {
+    login: 'Войти',
+    register: 'Регистрация',
+    profile: 'Профиль',
+    logout: 'Выйти',
+}

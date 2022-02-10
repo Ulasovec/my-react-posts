@@ -21,6 +21,11 @@ nav > * {
   margin: 4px;
 }
 
+.main__menu {
+  display: flex;
+  justify-content: space-between;
+}
+
 .demos {
   display: flex;
   justify-content: left;
