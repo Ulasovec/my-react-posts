@@ -8,7 +8,8 @@ import {toast, Toaster} from "react-hot-toast";
 
 const mutationOptions = {
     onError: (error, variables, context) => {
-        toast.error(error.message);
+        toast.error(error.response?.data?.error?.message ?? error.message);
+        //console.log('error response: ', error.response);
         //console.log('User mutation variables: ', JSON.stringify(error));
         //console.log('User mutation variables: ', variables);
     },
